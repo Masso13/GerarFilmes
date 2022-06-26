@@ -18,5 +18,10 @@ var filmes = [
         titulo: "Sonic 2: O Filme",
         data_lancamento: [2022, 4, 7],
         imagem: "https://m.media-amazon.com/images/M/MV5BMjYyNmE2NDItOWQzOC00ZDY4LTg3M2ItMmY0ZTUyZWUzODdhXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_QL75_UX280_CR0,1,280,414_.jpg"
+    },
+    {
+        titulo: "Velozes & Furiosos: Desafio em Tóquio",
+        data_lancamento: [2006, 6, 24],
+        imagem: "https://m.media-amazon.com/images/M/MV5BMTQ2NTMxODEyNV5BMl5BanBnXkFtZTcwMDgxMjA0MQ@@._V1_.jpg"
     }
 ]

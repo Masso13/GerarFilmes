@@ -1,30 +1,50 @@
 const datenow = new Date();
 const ano_atual = datenow.getFullYear();
 
-function criarFilmesLancamentos(filmes) {
-    let lancamentos = document.getElementById("lancamentos-cards");
-    let organizacao = {
-        data: [],
-        filmes: []
-    };
-    for (let filme of filmes) {
-        let ano = filme.data_lancamento[0]
-        let mes = filme.data_lancamento[1]-1
-        let dia = filme.data_lancamento[2]
+function criarFilmesLancamentos() {
+    let lancamentos_cards = document.getElementById("lancamentos-cards");
+    let lancamentos = pegarLancamentos();
+    let lancamentos_organizados = organizarLancamentos(lancamentos);
 
-        if (ano>=ano_atual-1) {
-            let data = new Date(ano, mes, dia);
-            organizacao.data[organizacao.data.length] = data;
-            organizacao.filmes[organizacao.filmes.length] = filme;
+    //console.log(lancamentos);
+    console.log(lancamentos_organizados)
+    for (filme of lancamentos_organizados) {
+        criarElementoFilme(filme, lancamentos_cards)
+    }
+}
+
+function organizarLancamentos(lancamentos) {
+    for (let i2 = 0; i2 < lancamentos.length-1; i2++) {
+        for (let i = 0; i < lancamentos.length-1; i++) {
+            let filme1 = lancamentos[i];
+            let ano = filme1.data_lancamento[0];
+            let mes = filme1.data_lancamento[1];
+            let dia = filme1.data_lancamento[2];
+
+            let filme2 = lancamentos[i+1];
+            let ano2 = filme2.data_lancamento[0];
+            let mes2 = filme2.data_lancamento[1];
+            let dia2 = filme2.data_lancamento[2];
+
+            if (ano < ano2) {
+                lancamentos[i] = filme2;
+                lancamentos[i+1] = filme1;
+            }
         }
     }
+    return lancamentos;
+}
 
-    for (let data of organizacao.data.sort()) {
-        let index = organizacao.data.indexOf(data);
-        console.log(organizacao.filmes[index])
+function pegarLancamentos() {
+    let lancamentos = [];
+
+    for (let filme of filmes) {
+        let ano = filme.data_lancamento[0];
+        if (ano >= ano_atual-1) {
+            lancamentos[lancamentos.length] = filme;
+        }
     }
-
-    console.log(organizacao.data.sort())
+    return lancamentos;
 }
 
 function criarElementoFilme(filme, placeholder) {
